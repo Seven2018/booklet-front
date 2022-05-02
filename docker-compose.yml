@@ -1,0 +1,21 @@
+version: "3"
+services:
+  nuxt:
+    image: node:17
+    working_dir: /app
+    entrypoint: 'bash -c'
+    command: ['rm /tmp/nitro/* ; cd app ; yarn install; yarn dev']
+    volumes:
+      - ./booklet-front:/app
+      - node_modules:/app/node_modules
+    ports:
+      - "24678:24678"
+    networks:
+      - seven_booklet
+
+volumes:
+  node_modules:
+
+networks:
+  seven_booklet:
+    driver: bridge
